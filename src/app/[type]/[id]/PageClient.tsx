@@ -52,6 +52,7 @@ export function PageClient({ content }: PageClientProps) {
     <>
       <Header />
       <main className="min-h-screen bg-black text-white pt-16">
+        {/* Backボタン - 変更なし */}
         <div className="absolute top-20 left-4 z-20">
           <button 
             onClick={handleBack}
@@ -75,20 +76,28 @@ export function PageClient({ content }: PageClientProps) {
 
         <div className="max-w-7xl mx-auto px-4 -mt-32 relative z-10">
           <div className="flex flex-col gap-6">
-          <div className="flex items-center gap-4 relative">
-  <h1 className="text-5xl font-bold mb-4">{content.title}</h1>
-  <div className="relative"> {/* 新規追加: ボタンとToastのコンテナ */}
-    <button
-      onClick={toggleMyList}
-      className="p-2 rounded-full hover:bg-white/10 transition-colors"
-      title={isInMyList ? "マイリストから削除" : "マイリストに追加"}
-    >
-      {isInMyList ? (
-        <BookmarkSolid className="w-6 h-6 text-yellow-500" />
-      ) : (
-        <BookmarkOutline className="w-6 h-6" />
-      )}
-    </button>
+            {/* タイトルとブックマークボタンのセクション - 修正 */}
+            <div className="flex items-start justify-between gap-4">
+              <h1 className="text-5xl font-bold">{content.title}</h1>
+              <div className="relative">
+                <button
+                  onClick={toggleMyList}
+                  className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                  title={isInMyList ? "マイリストから削除" : "マイリストに追加"}
+                >
+                  {isInMyList ? (
+                    <BookmarkSolid className="w-6 h-6 text-yellow-500" />
+                  ) : (
+                    <BookmarkOutline className="w-6 h-6" />
+                  )}
+                </button>
+                <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.5rem)] w-max z-50">
+                  <Toast 
+                    show={showToast} 
+                    message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
+                  />
+                </div>
+              </div>
             </div>
             <p className="text-2xl text-gray-300">
               総合ランキング #{content.rank}位
@@ -154,14 +163,6 @@ export function PageClient({ content }: PageClientProps) {
             データ更新日: {data.lastUpdated}
           </p>
         </div>
-
-        <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 whitespace-nowrap">
-      <Toast 
-        show={showToast} 
-        message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
-      />
-    </div>
-  </div>
       </main>
     </>
   );
