@@ -1,12 +1,11 @@
-// src/components/Carousel.tsx
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import Image from 'next/image';
-import { Content, Platform } from '@/types';
+import { Content } from '@/types';  // Platformを削除
 import { useEffect, useState } from 'react';
-import { getPlatformLogo } from '@/utils/platform';  // importのみ残す
+import { getPlatformLogo } from '@/utils/platform';
 import Link from 'next/link';
 
 export const Carousel = ({ items }: { items: Content[] }) => {
