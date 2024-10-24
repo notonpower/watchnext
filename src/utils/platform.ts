@@ -19,11 +19,9 @@ export function getPlatformLogo(platform: Platform, type: LogoType): string {
   }
 }
 
-// 画像パス取得関数
+// 画像パス取得関数 - 修正
 export function getImagePath(path: string): string {
-  if (path.startsWith('http')) {
-    return path;
-  }
+  // もともとのパスをそのまま返す
   return path;
 }
 
@@ -31,19 +29,12 @@ export function getImagePath(path: string): string {
 export function createShortId(title: string): string {
   return title
     .toLowerCase()
-    // 全角スペースを半角に
     .replace(/　/g, ' ')
-    // 特殊文字を削除または変換
     .replace(/[：:/]/g, '-')
     .replace(/[』』」］】｣）)/]/g, '')
     .replace(/[『『「［【｢（(]/g, '')
-    // 空白をハイフンに
     .replace(/\s+/g, '-')
-    // 日本語をローマ字に変換する必要がある場合は、別途ライブラリを使用
-    // 不要な記号を削除
     .replace(/[&,+()$~%.'":*?<>{}]/g, '')
-    // 複数のハイフンを1つに
     .replace(/-+/g, '-')
-    // 先頭と末尾のハイフンを削除
     .replace(/^-+|-+$/g, '');
 }
