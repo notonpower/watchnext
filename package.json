@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",  
+    "build": "next build",
     "dev": "next dev",
     "start": "next start"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
+    "framer-motion": "^11.11.9",
     "next": "14.0.1",
     "next-themes": "^0.2.1",
     "react": "^18",

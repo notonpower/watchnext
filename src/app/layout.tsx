@@ -1,37 +1,33 @@
-import type { Metadata } from "next";
+// app/layout.tsx
+'use client';
+
 import { Inter } from "next/font/google";
+import { motion, AnimatePresence } from 'framer-motion';
 import "./globals.css";
 
-// フォントの設定を修正
 const inter = Inter({ 
   subsets: ["latin"],
   display: 'swap',
 });
-
-export const metadata: Metadata = {
-  title: "Watch Next",
-  description: "Find what to watch next across streaming platforms",
-};
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // basePathの設定
-  const basePath = process.env.NODE_ENV === 'production' ? '/watchnext' : '';
-  
   return (
     <html lang="ja" suppressHydrationWarning className="dark">
-      <head>
-        <link 
-          rel="stylesheet" 
-          href={`${basePath}/_next/static/css/app.css`}
-          precedence="default"
-        />
-      </head>
-      <body className={`${inter.className} min-h-screen bg-black text-white`}>
-        {children}
+      <body className={inter.className}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {children}
+          </motion.div>
+        </AnimatePresence>
       </body>
     </html>
   );
