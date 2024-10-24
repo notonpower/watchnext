@@ -1,7 +1,11 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+// Swiperのスタイルをすべて明示的にインポート
+import 'swiper/css/bundle';
 import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import Image from 'next/image';
 import { Content } from '@/types';
 import { useEffect, useState } from 'react';
