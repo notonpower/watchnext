@@ -1,3 +1,4 @@
+// components/Toast.tsx
 'use client';
 
 import { CheckCircleIcon } from '@heroicons/react/24/outline';
@@ -15,15 +16,13 @@ export function Toast({
 
   return (
     <div className={`
-      fixed transform 
+      flex items-center gap-2 
       bg-green-600 backdrop-blur-sm 
       text-white px-4 py-2 
       rounded-lg shadow-lg 
-      flex items-center gap-2 
       whitespace-nowrap
-      z-50
-      transition-all duration-300
-      ${show ? 'opacity-100' : 'opacity-0'}
+      transition-all duration-300 ease-in-out
+      ${show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}
       ${className}
     `}>
       <CheckCircleIcon className="h-5 w-5 text-white" />
