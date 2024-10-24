@@ -1,26 +1,34 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
+import Link from 'next/link';  // この行を追加
+import { useRouter } from 'next/navigation';
 import { getPlatformLogo, getImagePath } from '@/utils/platform';
 import { Header } from '@/components/Header';
 import { ChevronLeftIcon, BookmarkIcon as BookmarkOutline } from '@heroicons/react/24/outline';
 import { BookmarkIcon as BookmarkSolid } from '@heroicons/react/24/solid';
 import { useState, useEffect } from 'react';
 import { Content } from '@/types';
+import { Toast } from '@/components/Toast';
 import data from '@/data/data.json';
-
 interface PageClientProps {
   content: Content;
 }
 
 export function PageClient({ content }: PageClientProps) {
+  const router = useRouter();
   const [isInMyList, setIsInMyList] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const myList = JSON.parse(localStorage.getItem('myList') || '[]');
     setIsInMyList(myList.some((item: Content) => item.title === content.title));
   }, [content.title]);
+
+  const handleBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    router.back();
+  };
 
   const toggleMyList = () => {
     const myList = JSON.parse(localStorage.getItem('myList') || '[]');
@@ -33,6 +41,8 @@ export function PageClient({ content }: PageClientProps) {
       localStorage.setItem('myList', JSON.stringify(myList));
       setIsInMyList(true);
     }
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
   };
 
   return (
@@ -40,13 +50,13 @@ export function PageClient({ content }: PageClientProps) {
       <Header />
       <main className="min-h-screen bg-black text-white pt-16">
         <div className="absolute top-20 left-4 z-20">
-          <Link 
-            href="/"
+          <button
+            onClick={handleBack}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-colors"
           >
             <ChevronLeftIcon className="w-5 h-5" />
             <span>Back</span>
-          </Link>
+          </button>
         </div>
 
         <div className="relative h-[70vh] w-full">
@@ -141,6 +151,11 @@ export function PageClient({ content }: PageClientProps) {
           </p>
         </div>
       </main>
+
+      <Toast 
+        show={showToast} 
+        message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
+      />
     </>
   );
 }

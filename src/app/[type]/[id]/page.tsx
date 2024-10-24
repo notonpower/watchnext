@@ -1,4 +1,4 @@
-import { PageClient } from './PageClient'; // 拡張子を削除
+import { PageClient } from './PageClient';
 import data from '@/data/data.json';
 import { createShortId } from '@/utils/platform';
 import { Content } from '@/types';

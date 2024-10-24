@@ -1,4 +1,3 @@
-// src/components/Carousel.tsx
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -12,7 +11,7 @@ import { getPlatformLogo, createShortId, getImagePath } from '@/utils/platform';
 import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/24/outline';
 
-export const Carousel = ({ items }: { items: Content[] }) => {
+export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: string }) => {
   const [mounted, setMounted] = useState(false);
   const sortedItems = [...items].sort((a, b) => b.powerValue - a.powerValue);
 
@@ -25,15 +24,15 @@ export const Carousel = ({ items }: { items: Content[] }) => {
   }
 
   return (
-    <div className="group relative">
+    <div className="relative group/section">
       <Swiper
         modules={[Navigation]}
         spaceBetween={24}
         slidesPerView={'auto'}
         className="w-full"
         navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
+          nextEl: `.swiper-button-next-${sectionId}`,
+          prevEl: `.swiper-button-prev-${sectionId}`,
         }}
         breakpoints={{
           320: { slidesPerView: 1.1 },
@@ -89,8 +88,8 @@ export const Carousel = ({ items }: { items: Content[] }) => {
         ))}
       </Swiper>
       
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 z-10">
-        <div className="swiper-button-next flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute -right-6 top-1/2 -translate-y-1/2 z-10">
+        <div className={`swiper-button-next-${sectionId} flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm opacity-0 group-hover/section:opacity-100 transition-opacity cursor-pointer`}>
           <ChevronRightIcon className="w-6 h-6 text-white" />
         </div>
       </div>
