@@ -10,7 +10,38 @@ interface PageProps {
   params: { type: string; id: string };
 }
 
-// paramsをグローバルに利用可能にする関数
+// 静的パスを生成
+export function generateStaticParams() {
+  const moviePaths = data.movies.overall.map((movie) => ({
+    type: 'movie',
+    id: encodeURIComponent(movie.title.toLowerCase().replace(/\s+/g, '-')),
+  }));
+
+  const tvPaths = data.tv_shows.overall.map((show) => ({
+    type: 'tv',
+    id: encodeURIComponent(show.title.toLowerCase().replace(/\s+/g, '-')),
+  }));
+
+  return [...moviePaths, ...tvPaths];
+}
+
+// メタデータを生成
+export function generateMetadata({ params }: PageProps) {
+  const content = getPageContent(params.type, params.id);
+  if (!content) {
+    return {
+      title: 'Not Found - Watch Next',
+      description: 'Content not found',
+    };
+  }
+
+  return {
+    title: `${content.title} - Watch Next`,
+    description: `${content.title}の視聴情報・ランキング - Power Value: ${content.powerValue}`,
+  };
+}
+
+// コンテンツ取得関数
 function getPageContent(contentType: string, contentId: string) {
   const content = contentType === 'movie' 
     ? data.movies.overall.find(item => 
