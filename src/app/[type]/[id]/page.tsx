@@ -3,29 +3,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import data from '@/data/data.json';
 import { notFound } from 'next/navigation';
-import { getPlatformLogo } from '@/utils/platform';
+import { getPlatformLogo, createShortId } from '@/utils/platform';
 import { Header } from '@/components/Header';
 
 interface PageProps {
   params: { type: string; id: string };
 }
 
-// 静的パスを生成
 export function generateStaticParams() {
   const moviePaths = data.movies.overall.map((movie) => ({
     type: 'movie',
-    id: encodeURIComponent(movie.title.toLowerCase().replace(/\s+/g, '-')),
+    id: createShortId(movie.title),
   }));
 
   const tvPaths = data.tv_shows.overall.map((show) => ({
     type: 'tv',
-    id: encodeURIComponent(show.title.toLowerCase().replace(/\s+/g, '-')),
+    id: createShortId(show.title),
   }));
 
   return [...moviePaths, ...tvPaths];
 }
 
-// メタデータを生成
 export function generateMetadata({ params }: PageProps) {
   const content = getPageContent(params.type, params.id);
   if (!content) {
@@ -41,13 +39,12 @@ export function generateMetadata({ params }: PageProps) {
   };
 }
 
-// コンテンツ取得関数
 function getPageContent(contentType: string, contentId: string) {
   const content = contentType === 'movie' 
     ? data.movies.overall.find(item => 
-        encodeURIComponent(item.title.toLowerCase().replace(/\s+/g, '-')) === contentId)
+        createShortId(item.title) === contentId)
     : data.tv_shows.overall.find(item => 
-        encodeURIComponent(item.title.toLowerCase().replace(/\s+/g, '-')) === contentId);
+        createShortId(item.title) === contentId);
   
   return content;
 }
@@ -56,12 +53,10 @@ export default function Page(props: PageProps) {
   const contentType = props.params.type;
   const contentId = props.params.id;
 
-  // 型チェック
   if (contentType !== 'movie' && contentType !== 'tv') {
     notFound();
   }
 
-  // コンテンツ取得
   const content = getPageContent(contentType, contentId);
 
   if (!content) {

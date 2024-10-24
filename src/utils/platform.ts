@@ -1,7 +1,7 @@
 // src/utils/platform.ts
 import { Platform } from '@/types';
 
-export const getPlatformLogo = (platform: Platform, type: 'square' | 'full' = 'square') => {
+export function getPlatformLogo(platform: Platform, type: 'square' | 'full' = 'square') {
   const suffix = type === 'square' ? '_square' : '_full';
   
   switch (platform.name) {
@@ -14,4 +14,15 @@ export const getPlatformLogo = (platform: Platform, type: 'square' | 'full' = 's
     default:
       return "";
   }
-};
+}
+
+export function createShortId(title: string): string {
+  const str = title.toLowerCase();
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  return Math.abs(hash).toString(36);
+}
