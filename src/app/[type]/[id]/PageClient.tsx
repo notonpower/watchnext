@@ -10,7 +10,7 @@ import { BookmarkIcon as BookmarkSolid } from '@heroicons/react/24/solid';
 import { useState, useEffect } from 'react';
 import { Content } from '@/types';
 import { Toast } from '@/components/Toast';
-import data from '@/data/data.json';
+import data from '@/data/data';
 
 interface PageClientProps {
   content: Content;

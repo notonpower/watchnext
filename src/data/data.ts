@@ -1,4 +1,6 @@
-{
+import { ContentData } from '@/types';
+
+export const data: ContentData = {
     "lastUpdated": "2024-10-14",
     "nextUpdate": "2024-10-21",
     "tv_shows": {
@@ -9,6 +11,7 @@
           "powerValue": 4700,
           "image": "/images/dandadan.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Netflix",
@@ -30,6 +33,7 @@
           "powerValue": 2600,
           "image": "/images/monster.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Netflix",
@@ -43,6 +47,7 @@
           "powerValue": 2510,
           "image": "/images/dbdaima.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Netflix",
@@ -60,6 +65,7 @@
           "powerValue": 1770,
           "image": "/images/bluelock.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Netflix",
@@ -81,6 +87,7 @@
           "powerValue": 1620,
           "image": "/images/rezero.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Prime Video",
@@ -98,6 +105,7 @@
           "powerValue": 800,
           "image": "/images/hunterxhunter.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Prime Video",
@@ -111,6 +119,7 @@
           "powerValue": 900,
           "image": "/images/suiyoubi-no-downtown.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "U-NEXT",
@@ -124,6 +133,7 @@
           "powerValue": 1040,
           "image": "/images/hazure-waku.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Netflix",
@@ -137,6 +147,7 @@
           "powerValue": 390,
           "image": "/images/chi-earth.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
               "name": "Netflix",
@@ -150,6 +161,7 @@
           "powerValue": 260,
           "image": "/images/gundam-requiem.webp",
           "imageSource": "",
+          "contentType": "tv" as const,
           "platforms": [
             {
                 "name": "Netflix",
@@ -168,6 +180,7 @@
         "powerValue": 2600,
         "image": "/images/mystery-to-iu-nakare.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "Netflix",
@@ -181,6 +194,7 @@
         "powerValue": 1950,
         "image": "/images/chinmoku-no-parade.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "Netflix",
@@ -194,6 +208,7 @@
         "powerValue": 1800,
         "image": "/images/odoru-3.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "U-NEXT",
@@ -207,6 +222,7 @@
         "powerValue": 1600,
         "image": "/images/onmyoji-zero.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "Prime Video",
@@ -220,6 +236,7 @@
         "powerValue": 1350,
         "image": "/images/odoru-1.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "U-NEXT",
@@ -233,6 +250,7 @@
         "powerValue": 1300,
         "image": "/images/survival-drive.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "Netflix",
@@ -246,6 +264,7 @@
         "powerValue": 1200,
         "image": "/images/yutori-international.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "Prime Video",
@@ -259,6 +278,7 @@
         "powerValue": 1040,
         "image": "/images/20th-century-boys-1.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "Netflix",
@@ -272,6 +292,7 @@
         "powerValue": 900,
         "image": "/images/odoru-final.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "U-NEXT",
@@ -285,6 +306,7 @@
         "powerValue": 295,
         "image": "/images/kyou-kara-ore-wa-movie.webp",
         "imageSource": "",
+        "contentType": "movie" as const,
         "platforms": [
           {
             "name": "Prime Video",
@@ -297,5 +319,7 @@
         ]
       }
     ]
-}
-}
+  }
+};
+
+export default data;

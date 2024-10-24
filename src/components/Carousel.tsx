@@ -47,19 +47,7 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
         {sortedItems.map((item, index) => (
           <SwiperSlide key={item.title} className="w-[450px]">
 <Link 
-  href={`/${
-    // ここを修正
-    item.title === "ダンダダン" || 
-    item.title === "モンスター" || 
-    item.title === "ドラゴンボールDAIMA" || 
-    item.title === "ブルーロック" || 
-    item.title === "Re:ゼロから始める異世界生活" || 
-    item.title === "HUNTER×HUNTER" || 
-    item.title === "水曜日のダウンタウン" || 
-    item.title === "ハズレ枠の【状態異常スキル】で最強になった俺がすべてを蹂躙するまで" || 
-    item.title === "チ。ー地球の運動についてー" || 
-    item.title === "機動戦士ガンダム 復讐のレクイエム" ? 'tv' : 'movie'
-  }/${createShortId(item.title)}`}
+  href={`/${item.contentType}/${createShortId(item.title)}`}
   className="block"
 >
               <div className="relative group cursor-pointer">

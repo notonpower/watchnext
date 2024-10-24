@@ -1,6 +1,6 @@
 import { Carousel } from "@/components/Carousel";
 import { Header } from "@/components/Header";
-import data from "@/data/data.json";
+import data from '@/data/data';
 
 export default function Home() {
   return (
