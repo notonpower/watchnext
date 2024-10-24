@@ -1,5 +1,5 @@
 import { PageClient } from './PageClient';
-import data from '@/data/data.json';
+import data from '@/data/data';  // .jsonを削除
 import { createShortId } from '@/utils/platform';
 import { Content } from '@/types';
 
