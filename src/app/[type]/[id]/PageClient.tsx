@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';  // この行を追加
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { getPlatformLogo, getImagePath } from '@/utils/platform';
 import { Header } from '@/components/Header';
@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { Content } from '@/types';
 import { Toast } from '@/components/Toast';
 import data from '@/data/data.json';
+
 interface PageClientProps {
   content: Content;
 }
@@ -32,15 +33,17 @@ export function PageClient({ content }: PageClientProps) {
 
   const toggleMyList = () => {
     const myList = JSON.parse(localStorage.getItem('myList') || '[]');
+    let newIsInMyList;
     if (isInMyList) {
       const newList = myList.filter((item: Content) => item.title !== content.title);
       localStorage.setItem('myList', JSON.stringify(newList));
-      setIsInMyList(false);
+      newIsInMyList = false;
     } else {
       myList.push(content);
       localStorage.setItem('myList', JSON.stringify(myList));
-      setIsInMyList(true);
+      newIsInMyList = true;
     }
+    setIsInMyList(newIsInMyList);
     setShowToast(true);
     setTimeout(() => setShowToast(false), 3000);
   };
@@ -50,7 +53,7 @@ export function PageClient({ content }: PageClientProps) {
       <Header />
       <main className="min-h-screen bg-black text-white pt-16">
         <div className="absolute top-20 left-4 z-20">
-          <button
+          <button 
             onClick={handleBack}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-colors"
           >
@@ -59,14 +62,14 @@ export function PageClient({ content }: PageClientProps) {
           </button>
         </div>
 
-        <div className="relative h-[70vh] w-full transition-all duration-700">
-  <Image
-    src={getImagePath(content.image)}
-    alt={content.title}
-    fill
-    priority
-    className="object-cover transition-transform duration-700 hover:scale-105"
-  />
+        <div className="relative h-[70vh] w-full">
+          <Image
+            src={getImagePath(content.image)}
+            alt={content.title}
+            fill
+            priority
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         </div>
 
@@ -93,9 +96,9 @@ export function PageClient({ content }: PageClientProps) {
             <div className="flex flex-wrap gap-4">
               {content.platforms.map((platform, index) => (
                 <div 
-                key={index}
-                className="bg-black/40 backdrop-blur-sm rounded-lg p-4 flex items-center gap-4 border border-gray-800 transition-all duration-300 hover:bg-black/60 hover:border-gray-700"
-              >
+                  key={index}
+                  className="bg-black/40 backdrop-blur-sm rounded-lg p-4 flex items-center gap-4 border border-gray-800"
+                >
                   <Image
                     src={getPlatformLogo(platform, 'full')}
                     alt={platform.name}
@@ -127,10 +130,10 @@ export function PageClient({ content }: PageClientProps) {
             <div className="flex flex-wrap gap-4 mt-4">
               {content.platforms.map((platform, index) => (
                 <Link
-  key={index}
-  href="#"
-  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center gap-3 transition-all duration-300 hover:transform hover:scale-105"
->
+                  key={index}
+                  href="#"
+                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center gap-3 transition-colors"
+                >
                   <Image
                     src={getPlatformLogo(platform, 'square')}
                     alt={platform.name}
@@ -150,12 +153,12 @@ export function PageClient({ content }: PageClientProps) {
             データ更新日: {data.lastUpdated}
           </p>
         </div>
-      </main>
 
-      <Toast 
-        show={showToast} 
-        message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
-      />
+        <Toast 
+          show={showToast} 
+          message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
+        />
+      </main>
     </>
   );
 }

@@ -9,31 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       keyframes: {
-        'slide-in': {
+        'fade-in': {
           '0%': {
-            transform: 'translateY(-20px) translateX(-50%) scale(0.95)',
-            opacity: '0'
+            opacity: '0',
+            transform: 'translateY(10px) translateX(-50%)',
           },
           '100%': {
-            transform: 'translateY(0) translateX(-50%) scale(1)',
-            opacity: '1'
+            opacity: '1',
+            transform: 'translateY(0) translateX(-50%)',
           },
         },
-        'slide-out': {
+        'fade-out': {
           '0%': {
-            transform: 'translateY(0) translateX(-50%) scale(1)',
-            opacity: '1'
+            opacity: '1',
+            transform: 'translateY(0) translateX(-50%)',
           },
           '100%': {
-            transform: 'translateY(-20px) translateX(-50%) scale(0.95)',
-            opacity: '0'
+            opacity: '0',
+            transform: 'translateY(10px) translateX(-50%)',
           },
         }
       },
       animation: {
-        'slide-in': 'slide-in 0.5s ease-out forwards',
-        'slide-out': 'slide-out 0.5s ease-in forwards',
-      },
+        'fade-in': 'fade-in 0.3s ease-out forwards',
+        'fade-out': 'fade-out 0.3s ease-out forwards'
+      }
     },
   },
   plugins: [],

@@ -9,10 +9,11 @@ import { Content } from '@/types';
 import { useEffect, useState } from 'react';
 import { getPlatformLogo, createShortId, getImagePath } from '@/utils/platform';
 import Link from 'next/link';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 
 export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: string }) => {
   const [mounted, setMounted] = useState(false);
+  const [isStart, setIsStart] = useState(true);
   const sortedItems = [...items].sort((a, b) => b.powerValue - a.powerValue);
 
   useEffect(() => {
@@ -34,6 +35,9 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
           nextEl: `.swiper-button-next-${sectionId}`,
           prevEl: `.swiper-button-prev-${sectionId}`,
         }}
+        onSlideChange={(swiper) => {
+          setIsStart(swiper.isBeginning);
+        }}
         breakpoints={{
           320: { slidesPerView: 1.1 },
           640: { slidesPerView: 1.8 },
@@ -42,13 +46,10 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
       >
         {sortedItems.map((item, index) => (
           <SwiperSlide key={item.title} className="w-[450px]">
-<Link 
-  href={`/${item.platforms.some(p => 
-    p.name === 'Netflix' || 
-    ('label' in p && p.label === 'Only on Netflix')
-  ) ? 'tv' : 'movie'}/${createShortId(item.title)}`}
-  className="block transition-transform duration-300 hover:scale-[1.02]"
->
+            <Link 
+              href={`/movie/${createShortId(item.title)}`}
+              className="block"
+            >
               <div className="relative group cursor-pointer">
                 <div className="absolute top-2 left-2 z-10">
                   <div className="bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1">
@@ -91,11 +92,19 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
         ))}
       </Swiper>
       
+      {/* 左矢印 */}
+      <div className={`absolute -left-6 top-1/2 -translate-y-1/2 z-10 transition-opacity duration-300 ${isStart ? 'opacity-0' : 'opacity-100'}`}>
+        <div className={`swiper-button-prev-${sectionId} flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-all duration-300 transform hover:scale-110 cursor-pointer`}>
+          <ChevronLeftIcon className="w-6 h-6 text-white" />
+        </div>
+      </div>
+
+      {/* 右矢印 */}
       <div className="absolute -right-6 top-1/2 -translate-y-1/2 z-10">
-  <div className={`swiper-button-next-${sectionId} flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm opacity-100 hover:bg-black/70 transition-all duration-300 transform hover:scale-110`}>
-    <ChevronRightIcon className="w-6 h-6 text-white" />
-  </div>
-</div>
+        <div className={`swiper-button-next-${sectionId} flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm hover:bg-black/70 transition-all duration-300 transform hover:scale-110 cursor-pointer`}>
+          <ChevronRightIcon className="w-6 h-6 text-white" />
+        </div>
+      </div>
     </div>
   );
 };
