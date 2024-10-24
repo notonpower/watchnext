@@ -42,10 +42,13 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
       >
         {sortedItems.map((item, index) => (
           <SwiperSlide key={item.title} className="w-[450px]">
-            <Link 
-              href={`/${item.platforms.some(p => p.name === 'Netflix') ? 'tv' : 'movie'}/${createShortId(item.title)}`}
-              className="block"
-            >
+<Link 
+  href={`/${item.platforms.some(p => 
+    p.name === 'Netflix' || 
+    ('label' in p && p.label === 'Only on Netflix')
+  ) ? 'tv' : 'movie'}/${createShortId(item.title)}`}
+  className="block transition-transform duration-300 hover:scale-[1.02]"
+>
               <div className="relative group cursor-pointer">
                 <div className="absolute top-2 left-2 z-10">
                   <div className="bg-black/70 backdrop-blur-sm rounded-lg px-3 py-1">
@@ -89,10 +92,10 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
       </Swiper>
       
       <div className="absolute -right-6 top-1/2 -translate-y-1/2 z-10">
-        <div className={`swiper-button-next-${sectionId} flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm opacity-0 group-hover/section:opacity-100 transition-opacity cursor-pointer`}>
-          <ChevronRightIcon className="w-6 h-6 text-white" />
-        </div>
-      </div>
+  <div className={`swiper-button-next-${sectionId} flex items-center justify-center w-12 h-12 rounded-full bg-black/50 backdrop-blur-sm opacity-100 hover:bg-black/70 transition-all duration-300 transform hover:scale-110`}>
+    <ChevronRightIcon className="w-6 h-6 text-white" />
+  </div>
+</div>
     </div>
   );
 };

@@ -59,14 +59,14 @@ export function PageClient({ content }: PageClientProps) {
           </button>
         </div>
 
-        <div className="relative h-[70vh] w-full">
-          <Image
-            src={getImagePath(content.image)}
-            alt={content.title}
-            fill
-            priority
-            className="object-cover"
-          />
+        <div className="relative h-[70vh] w-full transition-all duration-700">
+  <Image
+    src={getImagePath(content.image)}
+    alt={content.title}
+    fill
+    priority
+    className="object-cover transition-transform duration-700 hover:scale-105"
+  />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
         </div>
 
@@ -93,9 +93,9 @@ export function PageClient({ content }: PageClientProps) {
             <div className="flex flex-wrap gap-4">
               {content.platforms.map((platform, index) => (
                 <div 
-                  key={index}
-                  className="bg-black/40 backdrop-blur-sm rounded-lg p-4 flex items-center gap-4 border border-gray-800"
-                >
+                key={index}
+                className="bg-black/40 backdrop-blur-sm rounded-lg p-4 flex items-center gap-4 border border-gray-800 transition-all duration-300 hover:bg-black/60 hover:border-gray-700"
+              >
                   <Image
                     src={getPlatformLogo(platform, 'full')}
                     alt={platform.name}
@@ -127,10 +127,10 @@ export function PageClient({ content }: PageClientProps) {
             <div className="flex flex-wrap gap-4 mt-4">
               {content.platforms.map((platform, index) => (
                 <Link
-                  key={index}
-                  href="#"
-                  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center gap-3 transition-colors"
-                >
+  key={index}
+  href="#"
+  className="bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 flex items-center gap-3 transition-all duration-300 hover:transform hover:scale-105"
+>
                   <Image
                     src={getPlatformLogo(platform, 'square')}
                     alt={platform.name}

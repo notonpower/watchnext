@@ -1,4 +1,3 @@
-// tailwind.config.ts
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -10,20 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       keyframes: {
-        'fade-in-up': {
+        'slide-in': {
           '0%': {
-            opacity: '0',
-            transform: 'translateY(10px) translateX(-50%)',
+            transform: 'translateY(-20px) translateX(-50%) scale(0.95)',
+            opacity: '0'
           },
           '100%': {
-            opacity: '1',
-            transform: 'translateY(0) translateX(-50%)',
+            transform: 'translateY(0) translateX(-50%) scale(1)',
+            opacity: '1'
+          },
+        },
+        'slide-out': {
+          '0%': {
+            transform: 'translateY(0) translateX(-50%) scale(1)',
+            opacity: '1'
+          },
+          '100%': {
+            transform: 'translateY(-20px) translateX(-50%) scale(0.95)',
+            opacity: '0'
           },
         }
       },
       animation: {
-        'fade-in-up': 'fade-in-up 0.3s ease-out',
-      }
+        'slide-in': 'slide-in 0.5s ease-out forwards',
+        'slide-out': 'slide-out 0.5s ease-in forwards',
+      },
     },
   },
   plugins: [],
