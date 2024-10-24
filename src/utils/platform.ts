@@ -1,40 +1,23 @@
-// utils/platform.ts
 import { Platform } from '@/types';
 
-type LogoType = 'square' | 'full';
-
-// プラットフォームのロゴ取得関数
-export function getPlatformLogo(platform: Platform, type: LogoType): string {
-  const basePath = '/images/platforms';
-  
-  switch (platform.name) {
-    case 'Netflix':
-      return `${basePath}/netflix-${type}.webp`;
-    case 'Prime Video':
-      return `${basePath}/prime-video-${type}.webp`;
-    case 'U-NEXT':
-      return `${basePath}/u-next-${type}.webp`;
-    default:
-      return `${basePath}/default-${type}.webp`;
+export function getPlatformLogo(platform: Platform, type: 'square' | 'full') {
+  if (platform.name === 'Netflix') {
+    return type === 'square' ? '/netflix-square.webp' : '/netflix.webp';
   }
+  if (platform.name === 'Prime Video') {
+    return type === 'square' ? '/amazon-square.webp' : '/amazon.webp';
+  }
+  if (platform.name === 'U-NEXT') {
+    return type === 'square' ? '/unext-square.webp' : '/unext.webp';
+  }
+  return '';
 }
 
-// 画像パス取得関数 - 修正
-export function getImagePath(path: string): string {
-  // もともとのパスをそのまま返す
-  return path;
+export function getImagePath(imageFileName: string) {
+  return imageFileName;
 }
 
-// タイトルからURLフレンドリーなIDを生成する関数
-export function createShortId(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/　/g, ' ')
-    .replace(/[：:/]/g, '-')
-    .replace(/[』』」］】｣）)/]/g, '')
-    .replace(/[『『「［【｢（(]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/[&,+()$~%.'":*?<>{}]/g, '')
-    .replace(/-+/g, '-')
-    .replace(/^-+|-+$/g, '');
+export function createShortId(title: string) {
+  // すでにdata.tsで定義されているIDをそのまま返す
+  return title;
 }
