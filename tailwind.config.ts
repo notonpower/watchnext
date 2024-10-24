@@ -1,4 +1,4 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
@@ -8,35 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      keyframes: {
-        'fade-in': {
-          '0%': {
-            opacity: '0',
-            transform: 'translateY(10px) translateX(-50%)',
-          },
-          '100%': {
-            opacity: '1',
-            transform: 'translateY(0) translateX(-50%)',
-          },
-        },
-        'fade-out': {
-          '0%': {
-            opacity: '1',
-            transform: 'translateY(0) translateX(-50%)',
-          },
-          '100%': {
-            opacity: '0',
-            transform: 'translateY(10px) translateX(-50%)',
-          },
-        }
-      },
       animation: {
-        'fade-in': 'fade-in 0.3s ease-out forwards',
-        'fade-out': 'fade-out 0.3s ease-out forwards'
-      }
+        'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        pulse: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '.5' },
+        },
+      },
     },
   },
   plugins: [],
-}
+};
 
-export default config
+export default config;

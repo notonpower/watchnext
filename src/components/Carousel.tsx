@@ -10,18 +10,30 @@ import { useEffect, useState } from 'react';
 import { getPlatformLogo, createShortId, getImagePath } from '@/utils/platform';
 import Link from 'next/link';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
+import SkeletonCard from './SkeletonCard';
 
 export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: string }) => {
   const [mounted, setMounted] = useState(false);
   const [isStart, setIsStart] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const sortedItems = [...items].sort((a, b) => b.powerValue - a.powerValue);
 
   useEffect(() => {
     setMounted(true);
+    // コンテンツの読み込みを模擬的に表現
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
   if (!mounted) {
-    return null;
+    return (
+      <div className="flex gap-6 overflow-hidden">
+        {[...Array(3)].map((_, i) => (
+          <SkeletonCard key={i} />
+        ))}
+      </div>
+    );
   }
 
   return (
@@ -44,8 +56,16 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
           1024: { slidesPerView: 2.8 },
         }}
       >
-        {sortedItems.map((item, index) => (
-          <SwiperSlide key={item.title} className="w-[450px]">
+        {isLoading ? (
+          [...Array(3)].map((_, i) => (
+            <SwiperSlide key={`skeleton-${i}`} className="w-[450px]">
+              <SkeletonCard />
+            </SwiperSlide>
+          ))
+        ) : (
+          sortedItems.map((item, index) => (
+            // 既存のSwiperSlideの内容はそのまま
+            <SwiperSlide key={item.title} className="w-[450px]">
 <Link 
   href={`/${item.contentType}/${createShortId(item.title)}`}
   className="block"
@@ -88,8 +108,9 @@ export const Carousel = ({ items, sectionId }: { items: Content[]; sectionId: st
                 </div>
               </div>
             </Link>
-          </SwiperSlide>
-        ))}
+            </SwiperSlide>
+          ))
+        )}
       </Swiper>
       
       {/* 左矢印 */}
