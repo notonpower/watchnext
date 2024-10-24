@@ -1,4 +1,3 @@
-// src/app/page.tsx
 import { Carousel } from "@/components/Carousel";
 import { Header } from "@/components/Header";
 import data from "@/data/data.json";

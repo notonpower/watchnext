@@ -1,4 +1,3 @@
-// src/components/Carousel.tsx
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -6,7 +5,7 @@ import 'swiper/css';
 import Image from 'next/image';
 import { Content } from '@/types';
 import { useEffect, useState } from 'react';
-import { getPlatformLogo, createShortId } from '@/utils/platform';
+import { getPlatformLogo, createShortId, getImagePath } from '@/utils/platform';
 import Link from 'next/link';
 
 export const Carousel = ({ items }: { items: Content[] }) => {
@@ -45,7 +44,7 @@ export const Carousel = ({ items }: { items: Content[] }) => {
                 </div>
               </div>
               <Image
-                src={item.image}
+                src={getImagePath(item.image)}
                 alt={item.title}
                 width={450}
                 height={253}

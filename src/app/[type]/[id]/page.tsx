@@ -1,9 +1,8 @@
-// src/app/[type]/[id]/page.tsx
 import Image from 'next/image';
 import Link from 'next/link';
 import data from '@/data/data.json';
 import { notFound } from 'next/navigation';
-import { getPlatformLogo, createShortId } from '@/utils/platform';
+import { getPlatformLogo, createShortId, getImagePath } from '@/utils/platform';
 import { Header } from '@/components/Header';
 
 interface PageProps {
@@ -69,7 +68,7 @@ export default function Page(props: PageProps) {
       <main className="min-h-screen bg-black text-white pt-16">
         <div className="relative h-[70vh] w-full">
           <Image
-            src={content.image}
+            src={getImagePath(content.image)}
             alt={content.title}
             fill
             priority

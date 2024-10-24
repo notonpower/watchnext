@@ -1,16 +1,16 @@
-// src/utils/platform.ts
 import { Platform } from '@/types';
 
 export function getPlatformLogo(platform: Platform, type: 'square' | 'full' = 'square') {
+  const prefix = process.env.NODE_ENV === 'production' ? '/watchnext' : '';
   const suffix = type === 'square' ? '_square' : '_full';
   
   switch (platform.name) {
     case "Netflix":
-      return `/images/netflix${suffix}.webp`;
+      return `${prefix}/images/netflix${suffix}.webp`;
     case "Prime Video":
-      return `/images/primevideo${suffix}.webp`;
+      return `${prefix}/images/primevideo${suffix}.webp`;
     case "U-NEXT":
-      return `/images/unext${suffix}.webp`;
+      return `${prefix}/images/unext${suffix}.webp`;
     default:
       return "";
   }
@@ -25,4 +25,9 @@ export function createShortId(title: string): string {
     hash = hash & hash;
   }
   return Math.abs(hash).toString(36);
+}
+
+export function getImagePath(path: string) {
+  const prefix = process.env.NODE_ENV === 'production' ? '/watchnext' : '';
+  return `${prefix}${path}`;
 }
