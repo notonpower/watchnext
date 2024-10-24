@@ -77,28 +77,28 @@ export function PageClient({ content }: PageClientProps) {
         <div className="max-w-7xl mx-auto px-4 -mt-32 relative z-10">
           <div className="flex flex-col gap-6">
             {/* タイトルとブックマークボタンのセクション - 修正 */}
-            <div className="flex items-start justify-between gap-4">
-              <h1 className="text-5xl font-bold">{content.title}</h1>
-              <div className="relative">
-                <button
-                  onClick={toggleMyList}
-                  className="p-2 rounded-full hover:bg-white/10 transition-colors"
-                  title={isInMyList ? "マイリストから削除" : "マイリストに追加"}
-                >
-                  {isInMyList ? (
-                    <BookmarkSolid className="w-6 h-6 text-yellow-500" />
-                  ) : (
-                    <BookmarkOutline className="w-6 h-6" />
-                  )}
-                </button>
-                <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.5rem)] w-max z-50">
-                  <Toast 
-                    show={showToast} 
-                    message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
-                  />
-                </div>
-              </div>
-            </div>
+            <div className="flex items-start justify-between gap-4 relative overflow-hidden pb-16">
+  <h1 className="text-5xl font-bold">{content.title}</h1>
+  <div className="relative">
+    <button
+      onClick={toggleMyList}
+      className="p-2 rounded-full hover:bg-white/10 transition-colors"
+      title={isInMyList ? "マイリストから削除" : "マイリストに追加"}
+    >
+      {isInMyList ? (
+        <BookmarkSolid className="w-6 h-6 text-yellow-500" />
+      ) : (
+        <BookmarkOutline className="w-6 h-6" />
+      )}
+    </button>
+    <div className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+0.5rem)] w-max">
+      <Toast 
+        show={showToast} 
+        message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
+      />
+    </div>
+  </div>
+</div>
             <p className="text-2xl text-gray-300">
               総合ランキング #{content.rank}位
             </p>
