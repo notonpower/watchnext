@@ -75,19 +75,19 @@ export function PageClient({ content }: PageClientProps) {
 
         <div className="max-w-7xl mx-auto px-4 -mt-32 relative z-10">
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4">
-              <h1 className="text-5xl font-bold mb-4">{content.title}</h1>
-              <button
-                onClick={toggleMyList}
-                className="p-2 rounded-full hover:bg-white/10 transition-colors"
-                title={isInMyList ? "マイリストから削除" : "マイリストに追加"}
-              >
-                {isInMyList ? (
-                  <BookmarkSolid className="w-6 h-6 text-yellow-500" />
-                ) : (
-                  <BookmarkOutline className="w-6 h-6" />
-                )}
-              </button>
+          <div className="flex items-center gap-4 relative"> {/* ここにrelative追加 */}
+  <h1 className="text-5xl font-bold mb-4">{content.title}</h1>
+  <button
+    onClick={toggleMyList}
+    className="p-2 rounded-full hover:bg-white/10 transition-colors"
+    title={isInMyList ? "マイリストから削除" : "マイリストに追加"}
+  >
+    {isInMyList ? (
+      <BookmarkSolid className="w-6 h-6 text-yellow-500" />
+    ) : (
+      <BookmarkOutline className="w-6 h-6" />
+    )}
+  </button>
             </div>
             <p className="text-2xl text-gray-300">
               総合ランキング #{content.rank}位
@@ -154,10 +154,12 @@ export function PageClient({ content }: PageClientProps) {
           </p>
         </div>
 
-        <Toast 
-          show={showToast} 
-          message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
-        />
+        <div className="absolute top-full left-[calc(100%-2.5rem)] mt-2">
+    <Toast 
+      show={showToast} 
+      message={isInMyList ? "マイリストに追加しました" : "マイリストから削除しました"} 
+    />
+  </div>
       </main>
     </>
   );
