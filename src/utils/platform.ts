@@ -14,11 +14,8 @@ export function getPlatformLogo(platform: Platform, type: 'square' | 'full') {
 }
 
 export function getImagePath(image: string) {
-  if (!image) return '';
-  if (image.startsWith('/images/')) {
-    return image;
-  }
-  return `/images${image}`;
+  // 既存のパスをそのまま返す（変更なし）
+  return image;
 }
 
 export function createShortId(title: string) {
